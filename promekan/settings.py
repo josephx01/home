@@ -156,3 +156,5 @@ if not DEBUG:
     import mimetypes
     mimetypes.add_type("text/css", ".css", True)
     mimetypes.add_type("application/javascript", ".js", True)
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
