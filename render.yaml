@@ -7,3 +7,8 @@ services:
       python manage.py collectstatic --noinput
     startCommand: gunicorn promekan.wsgi:application
     staticPublishPath: staticfiles
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: promekan.settings
+      - key: PYTHONUNBUFFERED
+        value: "1"
