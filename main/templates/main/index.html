@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T&T-Təmir və Təmizlik Xidmətləri</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/t-t_logo_favicon.ico' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/" style="text-decoration: none;">
+                    <h1><span>T</span>&T </h1>
+                </a>
+            </div>
+            
+            <div class="language-selector">
+                <button class="active" data-lang="az">AZ</button>
+                <button data-lang="en">EN</button>
+                <button data-lang="ru">RU</button>
+                <button data-lang="tr">TR</button>
+            </div>
+            
+            <nav id="navbar">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link" data-key="home">Ana Səhifə</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link" data-key="about">Haqqımızda</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link" data-key="services">Xidmətlər</a></li>
+                    <li class="nav-item"><a href="#products" class="nav-link" data-key="products">Məhsullar</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link" data-key="contact">Əlaqə</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ana Səhifə Bölməsi -->
+    <section id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1><span data-key="hero-title-1">Eviniz üçün peşəkar</span> <span class="highlight" data-key="hero-title-2">təmir</span> <span data-key="hero-title-3">və</span> <span class="highlight" data-key="hero-title-4">təmizlik</span> <span data-key="hero-title-5">xidmətləri</span></h1>
+                <p data-key="hero-subtitle">T&T ilə evinizi yeniləyin, təmiz və rahat yaşayış tərzini qoruyun.</p>
+                <div class="cta-buttons">
+                    <a href="#services" class="btn btn-primary" data-key="our-services">Xidmətlərimiz</a>
+                    <a href="#contact" class="btn btn-secondary" data-key="contact-us">Bizimlə Əlaqə</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Haqqımızda Bölməsi -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="about">Haqqımızda</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 data-key="who-we-are">Biz Kimik?</h3>
+                    <p data-key="about-description">T&T olaraq 10 ildən artıq təcrübəmizlə təmir və təmizlik sahəsində peşəkar xidmətlər təqdim edirik. Müştərilərimizin tələblərinə uyğun yüksək keyfiyyətli iş görmək bizim prioritetimizdir.</p>
+                    
+                    <h3 data-key="why-choose-us">Niyə Bizi Seçməlisiniz?</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="professional-team">Peşəkar komanda</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="quality-materials">Keyfiyyətli materiallar</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="affordable-prices">Sərfəli qiymətlər</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="guaranteed-service">Zəmanətli xidmət</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span data-key="customer-satisfaction">Müştəri məmnuniyyəti</span></li>
+                    </ul>
+                </div>   
+            </div>
+        </div>
+    </section>
+
+    <!-- Xidmətlər Bölməsi -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services">Xidmətlərimiz</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-roller"></i>
+                    </div>
+                    <h3 data-key="renovation">Təmir işləri</h3>
+                    <p data-key="renovation-desc">Mənzil və ofis sahələrinin peşəkar təmiri, dizayn və planlaşdırma xidmətləri.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3 data-key="cleaning">Təmizlik</h3>
+                    <p data-key="cleaning-desc">Ev, ofis və sənaye obyektlərinin cari və əsaslı təmizlik xidmətləri.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3 data-key="furniture">Mebel yığımı</h3>
+                    <p data-key="furniture-desc">İstənilən tip mebelin peşəkar yığılması və quraşdırılması.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 data-key="plumbing">Santexnika</h3>
+                    <p data-key="plumbing-desc">Su və kanalizasiya sistemlərinin quraşdırılması və təmiri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Məhsullar Bölməsi -->
+<section id="products">
+    <div class="container">
+        <div class="section-title">
+            <h2 data-key="products">Məhsullarımız</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                    {% else %}
+                    <img src="/static/images/placeholder.png" alt="{{ product.name }}" />
+                    {% endif %}
+                </div>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <div class="product-price">Qiymət: <span>{{ product.price }}₼</span></div>
+                <button class="btn btn-primary">Ətraflı</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+    <!-- Əlaqə Bölməsi -->
+    <section id="contact">
+        <div class="container">
+            <!-- Əsas başlıq -->
+            <div class="section-title">
+                <h2 data-key="contact">Əlaqə</h2>
+                <div class="underline"></div>
+            </div>
+    
+            <!-- Əlaqə məlumatları -->
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3 data-key="address">Ünvan</h3>
+                        <p>157 Azadlıq Prospekti</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <h3 data-key="phone">Telefon</h3>
+                        <p>+994 51 815 91 15</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3 data-key="email">E-poçt</h3>
+                        <p>info@t-t.homes</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <h3 data-key="working-hours">İş saatları</h3>
+                        <p data-key="working-hours-value">Hər gün: 09:00 - 21:00</p>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Əlaqə forması -->
+            <div class="container">
+                <div class="section-title">
+                        <h2 data-key="contact-us">Bizimlə Əlaqə</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="text-center">
+                    <p>Bizə mesaj göndərin</p>
+                </div>
+        
+                <div class="contact-grid">
+                    <div class="contact-form">
+                        <form method="POST" class="row">
+                            {% if messages %}
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                <script>
+                                    {% for message in messages %}
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Uğurlu!',
+                                            text: '{{ message }}',
+                                            confirmButtonText: 'Bağla'
+                                        });
+                                    {% endfor %}
+                                </script>
+                            {% endif %}
+        
+                            {% csrf_token %}
+        
+                            <div class="col-md-6 form-group">
+                                <label for="id_name" class="form-label">Ad Soyad</label>
+                                {{ form.name }}
+                            </div>
+        
+                            <div class="col-md-6 form-group">
+                                <label for="id_email" class="form-label">Email</label>
+                                {{ form.email }}
+                            </div>
+        
+                            <div class="col-md-6 form-group">
+                                <label for="id_phone" class="form-label">Telefon</label>
+                                {{ form.phone }}
+                            </div>
+        
+                            <div class="col-md-12 form-group">
+                                <label for="id_message" class="form-label">Mesaj</label>
+                                {{ form.message }}
+                            </div>
+        
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn">Göndər</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer Bölməsi -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><span>T</span>T</h2>
+                    <p data-key="footer-description">Təmir və təmizlik xidmətlərində peşəkar həllər.</p>
+                </div>
+                <div class="footer-links">
+                    <h3 data-key="quick-links">Sürətli keçidlər</h3>
+                    <ul>
+                        <li><a href="#home" data-key="home">Ana Səhifə</a></li>
+                        <li><a href="#about" data-key="about">Haqqımızda</a></li>
+                        <li><a href="#services" data-key="services">Xidmətlər</a></li>
+                        <li><a href="#products" data-key="products">Məhsullar</a></li>
+                        <li><a href="#contact" data-key="contact">Əlaqə</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3 data-key="follow-us">Bizi izləyin</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61574854896689&mibextid=wwXIfr&mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/temir.temizlik?igsh=NWZ6cDE0d3cxa2Fj&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 T-T. <span data-key="rights-reserved">Bütün hüquqlar qorunur.</span></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+    </script>
+</body>
+</html>
