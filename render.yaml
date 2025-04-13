@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: promekan
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn promekan.wsgi:application"
+    staticPublishPath: staticfiles
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: promekan.settings
+      - key: PYTHON_VERSION
+        value: 3.10
