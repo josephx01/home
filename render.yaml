@@ -5,7 +5,9 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: gunicorn promekan.wsgi:application
+    startCommand: |
+      python manage.py migrate &&
+      gunicorn promekan.wsgi:application
     staticPublishPath: staticfiles
     envVars:
       - key: DJANGO_SETTINGS_MODULE
