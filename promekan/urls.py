@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import index
-
+from django.conf import settings
 urlpatterns = [
     path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
     path('', index, name='index'),
