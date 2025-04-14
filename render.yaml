@@ -15,3 +15,7 @@ services:
         value: promekan.settings
       - key: PYTHONUNBUFFERED
         value: "1"
+    extraRoutes:
+      - type: rewrite
+        source: /media/(.*)
+        destination: /media/\1
