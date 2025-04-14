@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from main.views import index
 from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
     path('', index, name='index'),
    path('contact/', index, name='contact'),
 ]
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
