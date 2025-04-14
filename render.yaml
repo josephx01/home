@@ -15,7 +15,7 @@ services:
         value: promekan.settings
       - key: PYTHONUNBUFFERED
         value: "1"
-    extraRoutes:
-      - type: rewrite
-        source: /media/(.*)
-        destination: /media/\1
+    disk:
+      name: media
+      mountPath: /opt/render/project/src/media
+      sizeGB: 1
