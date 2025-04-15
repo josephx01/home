@@ -28,3 +28,15 @@ class Contact(models.Model):
 def clean(self):
     if "<script>" in self.message.lower():
         raise ValidationError("XSS? Hmmmm")
+
+class PackageOrder(models.Model):
+    package_name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
+    address = models.TextField()
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    note = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.package_name}"
