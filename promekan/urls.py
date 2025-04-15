@@ -19,7 +19,6 @@ from django.urls import path
 from main.views import index, package_detail
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
 
 urlpatterns = [
     path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
