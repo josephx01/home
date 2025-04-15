@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "hero-title-3": "və",
             "hero-title-4": "təmizlik",
             "hero-title-5": "xidmətləri",
-            "hero-subtitle": "promekan ilə evinizi yeniləyin, təmiz və rahat yaşayış tərzini qoruyun.",
+            "hero-subtitle": "T&T ilə evinizi yeniləyin, təmiz və rahat yaşayış tərzini qoruyun.",
             "our-services": "Xidmətlərimiz",
             "contact-us": "Bizimlə Əlaqə",
             "who-we-are": "Biz Kimik?",
