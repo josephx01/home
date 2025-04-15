@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ package.name }} - Xidmət Paketi</title>
+    <!-- Burada CSS və digər meta məlumatları əlavə edə bilərsən -->
+</head>
+<body>
+
+<section class="package-detail">
+  <div class="container">
+    <div class="package-info">
+      <img src="{{ package.image }}" alt="{{ package.name }}">
+      <h2>{{ package.name }}</h2>
+      <p>{{ package.details }}</p>
+    </div>
+
+    <div id="order-form" class="order-form">
+      <h3>Sifariş Formu</h3>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Göndər</button>
+      </form>
+    </div>
+  </div>
+
+  {% if success %}
+    <script>
+      alert("Sifarişiniz uğurla qəbul olundu!");
+    </script>
+  {% endif %}
+</section>
+
+</body>
+</html>
