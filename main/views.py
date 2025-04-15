@@ -62,7 +62,7 @@ def index(request):
     else:
         form = ContactForm()
 
-    return render(request, 'main/index.html', {'products': products, 'form': form})
+    return render(request, 'main/index.html', {'products': products, 'form': form, 'packages': PACKAGES})
 
 def package_detail(request, package_key):
     package = PACKAGES.get(package_key)
