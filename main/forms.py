@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact
+from .models import Contact, PackageOrder 
 
 
 class ContactForm(forms.ModelForm):
@@ -19,3 +19,11 @@ class ContactForm(forms.ModelForm):
         if "<script>" in message.lower() or "</script>" in message.lower():
             raise forms.ValidationError("XSS? Hmmm.")
         return message
+
+class PackageOrderForm(forms.ModelForm):
+    class Meta:
+        model = PackageOrder
+        fields = ['full_name', 'address', 'phone', 'email', 'note']
+        widgets = {
+            'note': forms.Textarea(attrs={'rows': 3}),
+        }
