@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Contact
+from .models import Product, Contact, PackageOrder
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -11,3 +11,5 @@ class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'created_at']
     search_fields = ['name', 'email']
     list_filter = ['created_at']
+
+admin.site.register(PackageOrder)
