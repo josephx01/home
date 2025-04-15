@@ -47,21 +47,32 @@
             </nav>
         </div>
     </header>
-
-    <!-- Ana Səhifə Bölməsi -->
-    <section id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1><span data-key="hero-title-1">Eviniz üçün peşəkar</span> <span class="highlight" data-key="hero-title-2">təmir</span> <span data-key="hero-title-3">və</span> <span class="highlight" data-key="hero-title-4">təmizlik</span> <span data-key="hero-title-5">xidmətləri</span></h1>
-                <p data-key="hero-subtitle">T&T ilə evinizi yeniləyin, təmiz və rahat yaşayış tərzini qoruyun.</p>
-                <div class="cta-buttons">
-                    <a href="#services" class="btn btn-primary" data-key="our-services">Xidmətlərimiz</a>
-                    <a href="#contact" class="btn btn-secondary" data-key="contact-us">Bizimlə Əlaqə</a>
+        <!-- Slider Section -->
+        <section id="home" class="slideshow-container">
+            <div class="slide active" style="background-image: url('../../../static/images/Untitled.jpeg')"></div>
+            <div class="slide" style="background-image: url('../../../static/images/Untitled1.jpeg')"></div>
+            <div class="slide" style="background-image: url('../../../static/images/Untitled2.jpeg')"></div>
+            <div class="slide" style="background-image: url('../../../static/images/Untitled3.jpeg')"></div>
+            
+            <div class="content-overlay">
+                <h1>Eviniz üçün peşəkar <span class="highlight">təmir</span> və <span class="highlight">təmizlik</span> xidmətləri</h1>
+                <p>T&T ilə evinizi yeniləyin, təmiz və rahat yaşayış tərzini qoruyun.</p>
+                <div class="buttons">
+                    <a href="#services" class="btn btn-primary">Xidmətlərimiz</a>
+                    <a href="#contact" class="btn btn-secondary">Bizimlə Əlaqə</a>
                 </div>
             </div>
-        </div>
-    </section>
-
+            
+            <button class="prev-btn">&#10094;</button>
+            <button class="next-btn">&#10095;</button>
+            
+            <div class="slideshow-nav">
+                <button class="nav-btn active" data-index="0"></button>
+                <button class="nav-btn" data-index="1"></button>
+                <button class="nav-btn" data-index="2"></button>
+                <button class="nav-btn" data-index="3"></button>
+            </div>
+        </section>
     <!-- Haqqımızda Bölməsi -->
     <section id="about">
         <div class="container">
