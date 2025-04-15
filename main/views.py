@@ -93,5 +93,6 @@ def package_detail(request, package_key):
 
     return render(request, 'main/package_detail.html', {
         'package': package,
-        'form': form
+        'form': form,
+        'success': True
     })
