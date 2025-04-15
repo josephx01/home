@@ -29,6 +29,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = [
+'home-cwwz.onrender.com',
 'www.t-t.homes',
 't-t.homes'
 ]
