@@ -19,10 +19,13 @@ from django.urls import path
 from main.views import index
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
+
 urlpatterns = [
     path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
     path('', index, name='index'),
    path('contact/', index, name='contact'),
+     path('paket/<str:package_key>/', views.package_detail, name='package_detail'),    
 ]
 if settings.DEBUG:
    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
