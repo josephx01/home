@@ -82,6 +82,7 @@
             </div>
         </section>
     <!-- Haqqımızda Bölməsi -->
+  <div class="section-divider"></div>
     <section id="about">
         <div class="container">
             <div class="section-title">
@@ -296,5 +297,28 @@
             </div>
         </div>
     </footer>
+    <script>
+            // Section animasiyaları üçün
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
+        
+        function checkScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionVisible = (sectionTop < window.innerHeight - 100);
+                
+                if (sectionVisible) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+        
+        // İlk yüklənmədə yoxla
+        checkScroll();
+        
+        // Scroll zamanı yoxla
+        window.addEventListener('scroll', checkScroll);
+    });
+    </script>
 </body>
 </html>

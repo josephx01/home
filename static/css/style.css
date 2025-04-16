@@ -24,6 +24,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     padding-top: 80px; /* Match header height */
+    
 }
 
 .container {
@@ -964,6 +965,119 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Section keçidləri üçün əlavə edilən ümumi stilləri */
+section {
+    position: relative;
+    padding: 80px 0;
+    z-index: 1;
+    transition: background-color 0.5s ease;
+}
+
+/* Section-lar arasında fon rəngi keçidi üçün */
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-light);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    padding-top: 80px; /* Match header height */
+    background-color: var(--bg-light);
+    transition: background-color 0.5s ease;
+}
+
+/* Home section üçün spesifik stilləri düzəltmək */
+#home {
+    margin-top: -80px; /* Header-i kompensasiya etmək üçün */
+    padding-top: 0;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* Section-lar arasında yumuşaq keçid üçün divider */
+.section-divider {
+    height: 50px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to bottom, transparent, var(--bg-light));
+}
+
+/* About section-un yuxarı hissəsinə divider əlavə edək */
+#about {
+    position: relative;
+    z-index: 2;
+    padding-top: 60px;
+    margin-top: 0;
+}
+
+#about:before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--bg-light));
+    z-index: -1;
+}
+
+/* Digər sectionlar üçün */
+#services, #products, #contact {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section keçidləri üçün animasiya */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Səhifə scroll olunduqda section'lara animasiya əlavə etmək üçün */
+.section-title, 
+.about-content, 
+.services-grid, 
+.products-grid, 
+.contact-content,
+.contact-form {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.section-title.visible, 
+.about-content.visible, 
+.services-grid.visible, 
+.products-grid.visible, 
+.contact-content.visible,
+.contact-form.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slayderin altındakı keçid üçün xüsusi stil */
+.slideshow-container:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, var(--bg-light));
+    z-index: 3;
+    pointer-events: none;
+}
 /* Responsive Design */
 @media (max-width: 992px) {
     .about-content {

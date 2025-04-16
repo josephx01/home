@@ -464,7 +464,6 @@ navLinks.forEach(link => {
         // Start slideshow on page load
         preloadImages();
         startSlideshow();
-        startSlideshow();
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -477,5 +476,46 @@ navLinks.forEach(link => {
                         block: 'start'
                     });
                 }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Section animasiyaları üçün
+            const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
+            
+            // Scroll hadisəsi
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const sectionVisible = (sectionTop < window.innerHeight - 100);
+                    
+                    if (sectionVisible) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // İlk yüklənmədə yoxla
+            checkScroll();
+            
+            // Scroll zamanı yoxla
+            window.addEventListener('scroll', checkScroll);
+            
+            // Scroll-link səlis keçid
+            const scrollLinks = document.querySelectorAll('a[href^="#"]');
+            scrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Səlis scroll
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Header hündürlüyünü kompensasiya edir
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
