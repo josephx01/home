@@ -249,7 +249,6 @@ document.querySelectorAll('.language-selector button').forEach(button => {
 
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('#navbar ul');
-const navMenu = document.querySelector('.nav-list');
 
 hamburger.addEventListener('click', function() {
     this.classList.toggle('active');
