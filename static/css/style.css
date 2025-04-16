@@ -1091,6 +1091,7 @@ footer {
 @media screen and (max-width: 768px) {
     .hamburger {
         display: block;
+
         margin-left: 20px;
     }
     
@@ -1128,6 +1129,40 @@ footer {
     
     .nav-list.active {
         left: 0;
+
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-list {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        width: 100%;
+        text-align: center;
+        padding: 0;
+    }
+
+    .nav-list.active {
+        max-height: 500px;
+        padding: 20px 0;
+    }
+
+    .nav-item {
+        margin: 16px 0;
     }
     
     .content-overlay h1 {

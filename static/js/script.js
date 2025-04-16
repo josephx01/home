@@ -249,6 +249,7 @@ document.querySelectorAll('.language-selector button').forEach(button => {
 
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('#navbar ul');
+const navMenu = document.querySelector('.nav-list');
 
 hamburger.addEventListener('click', function() {
     this.classList.toggle('active');
@@ -464,3 +465,18 @@ navLinks.forEach(link => {
         // Start slideshow on page load
         preloadImages();
         startSlideshow();
+        startSlideshow();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
