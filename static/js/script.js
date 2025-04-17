@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
     const translations = {
         az: {
             "home": "Ana Səhifə",
@@ -223,73 +224,298 @@
             "footer-description": "Tadilat ve temizlik hizmetlerinde profesyonel çözümler.",
             "rights-reserved": "Tüm hakları saklıdır."
     }
-        let slides = document.querySelectorAll(".slide");
-        let navBtns = document.querySelectorAll(".nav-btn");
-        let currentSlide = 0;
+};
+  function changeLanguage(lang) {
+    console.log("Dil dəyişdirilir: " + lang);
+    
+    document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+    
+    document.querySelectorAll('.language-selector button').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+}
+
+document.querySelectorAll('.language-selector button').forEach(button => {
+    button.addEventListener('click', function() {
+        const lang = this.getAttribute('data-lang');
+        changeLanguage(lang);
+    });
+});
+
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('#navbar ul');
+
+hamburger.addEventListener('click', function() {
+    this.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+const navLinks = document.querySelectorAll('#navbar ul li a');
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+});
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
         
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove("active");
-                navBtns[i].classList.remove("active");
-                if (i === index) {
-                    slide.classList.add("active");
-                    navBtns[i].classList.add("active");
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-list');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Language Selector
+        const langButtons = document.querySelectorAll('.language-selector button');
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                langButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Here you would add code to switch language
+            });
+        });
+        
+        // Slideshow functionality
+        const slides = document.querySelectorAll('.slide');
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentSlide = 0;
+        let slideInterval;
+        
+        // Ensure proper loading of background images on mobile
+        function preloadImages() {
+            slides.forEach(slide => {
+                const bgUrl = getComputedStyle(slide).backgroundImage;
+                if (bgUrl && bgUrl !== 'none') {
+                    const img = new Image();
+                    img.src = bgUrl.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
                 }
             });
         }
         
-        navBtns.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                currentSlide = index;
-                showSlide(currentSlide);
+        // Start automatic slideshow
+        function startSlideshow() {
+            slideInterval = setInterval(() => {
+                moveToNextSlide();
+            }, 5000);
+        }
+        
+        // Stop automatic slideshow
+        function stopSlideshow() {
+            clearInterval(slideInterval);
+        }
+        
+        // Set active slide
+        function setActiveSlide(index) {
+            // Remove active class from all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to current slide and nav button
+            slides[index].classList.add('active');
+            navBtns[index].classList.add('active');
+            
+            currentSlide = index;
+        }
+        
+        // Move to next slide
+        function moveToNextSlide() {
+            let nextIndex = currentSlide + 1;
+            if (nextIndex >= slides.length) {
+                nextIndex = 0;
+            }
+            setActiveSlide(nextIndex);
+        }
+        
+        // Move to previous slide
+        function moveToPrevSlide() {
+            let prevIndex = currentSlide - 1;
+            if (prevIndex < 0) {
+                prevIndex = slides.length - 1;
+            }
+            setActiveSlide(prevIndex);
+        }
+        
+        // Add touch swipe functionality for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        
+        slideshowContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        slideshowContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum swipe distance in pixels
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left - next slide
+                moveToNextSlide();
+                stopSlideshow();
+                startSlideshow();
+            }
+            
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right - previous slide
+                moveToPrevSlide();
+                stopSlideshow();
+                startSlideshow();
+            }
+        }
+        
+        // Navigation button click event
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const slideIndex = parseInt(btn.getAttribute('data-index'));
+                setActiveSlide(slideIndex);
+                stopSlideshow();
+                startSlideshow();
             });
         });
         
-        // Auto Slide
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 6000);
-        
-        
-        // =============== Hamburger Menu ===============
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-list');
-        
-        hamburger.addEventListener('click', function () {
-            this.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        const languageButtons = document.querySelectorAll(".language-selector button");
-        
-        languageButtons.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const selectedLang = btn.getAttribute("data-lang");
-        
-                // aktiv düymə
-                languageButtons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-        
-                const elements = document.querySelectorAll("[data-key]");
-                elements.forEach((el) => {
-                    const key = el.getAttribute("data-key");
-                    if (translations[selectedLang] && translations[selectedLang][key]) {
-                        el.textContent = translations[selectedLang][key];
-                    }
-                });
-            });
+        // Previous button click event
+        prevBtn.addEventListener('click', () => {
+            moveToPrevSlide();
+            stopSlideshow();
+            startSlideshow();
         });
         
-        // =========== Smooth Scroll ============
+        // Next button click event
+        nextBtn.addEventListener('click', () => {
+            moveToNextSlide();
+            stopSlideshow();
+            startSlideshow();
+        });
+        
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener("click", function (e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute("href"));
-                if (target) {
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
                     window.scrollTo({
-                        top: target.offsetTop,
-                        behavior: "smooth"
+                        top: targetElement.offsetTop - 80, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // Resize event to handle orientation changes
+        window.addEventListener('resize', () => {
+            // Refresh the layout if needed
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide) {
+                // Force a repaint for mobile browsers
+                activeSlide.style.display = 'none';
+                setTimeout(() => {
+                    activeSlide.style.display = '';
+                }, 10);
+            }
+        });
+        
+        // Start slideshow on page load
+        preloadImages();
+        startSlideshow();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Section animasiyaları üçün
+            const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
+            
+            // Scroll hadisəsi
+            function checkScroll() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const sectionVisible = (sectionTop < window.innerHeight - 100);
+                    
+                    if (sectionVisible) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // İlk yüklənmədə yoxla
+            checkScroll();
+            
+            // Scroll zamanı yoxla
+            window.addEventListener('scroll', checkScroll);
+            
+            // Scroll-link səlis keçid
+            const scrollLinks = document.querySelectorAll('a[href^="#"]');
+            scrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Səlis scroll
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70, // Header hündürlüyünü kompensasiya edir
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
