@@ -250,11 +250,19 @@ document.querySelectorAll('.language-selector button').forEach(button => {
 document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     const navList = document.querySelector(".nav-list");
+    const navLinks = document.querySelectorAll(".nav-link");
 
     if (hamburger && navList) {
         hamburger.addEventListener("click", function () {
             hamburger.classList.toggle("active");
             navList.classList.toggle("active");
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                navList.classList.remove("active");
+            });
         });
     }
 });

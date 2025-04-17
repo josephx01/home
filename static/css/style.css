@@ -212,7 +212,7 @@ section {
     display: block;
     width: 25px;
     height: 3px;
-    margin: 5px auto;
+    margin: 3px auto;
     background-color: white;
     transition: all 0.3s ease;
 }
@@ -1223,7 +1223,6 @@ body {
     .hamburger.active .bar:nth-child(3) {
         transform: rotate(-45deg) translateY(-6px);
     }
-  }
     
     .nav-list {
         position: fixed;
