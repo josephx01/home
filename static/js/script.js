@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
         navLinks.forEach(link => {
             link.addEventListener("click", () => {
                 hamburger.classList.remove("active");
-                navMenu.classList.remove("active");
+                navList.classList.remove("active");
             });
         });
     }
