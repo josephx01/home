@@ -247,22 +247,25 @@ document.querySelectorAll('.language-selector button').forEach(button => {
     });
 });
 
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('#navbar ul');
-
-hamburger.addEventListener('click', function() {
-    this.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-const navLinks = document.querySelectorAll('#navbar ul li a');
-navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navList = document.querySelector('.nav-list');
+    
+    // Toggle mobile menu when hamburger is clicked
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navList.classList.toggle('active');
+    });
+    
+    // Close mobile menu when a nav link is clicked
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navList.classList.remove('active');
+        });
     });
 });
-});
+
         // Header Scroll Effect
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
