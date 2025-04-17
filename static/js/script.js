@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
     const translations = {
         az: {
             "home": "Ana Səhifə",
@@ -224,141 +223,73 @@ document.addEventListener('DOMContentLoaded', function() {
             "footer-description": "Tadilat ve temizlik hizmetlerinde profesyonel çözümler.",
             "rights-reserved": "Tüm hakları saklıdır."
     }
-    document.addEventListener('DOMContentLoaded', function () {
-        // === Slideshow ===
-        const slides = document.querySelectorAll('.slide');
-        const navBtns = document.querySelectorAll('.nav-btn');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+        let slides = document.querySelectorAll(".slide");
+        let navBtns = document.querySelectorAll(".nav-btn");
         let currentSlide = 0;
-        let slideInterval;
-    
-        function setActiveSlide(index) {
-            slides.forEach(s => s.classList.remove('active'));
-            navBtns.forEach(b => b.classList.remove('active'));
-            slides[index].classList.add('active');
-            navBtns[index].classList.add('active');
-            currentSlide = index;
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+                navBtns[i].classList.remove("active");
+                if (i === index) {
+                    slide.classList.add("active");
+                    navBtns[i].classList.add("active");
+                }
+            });
         }
-    
-        function moveToNextSlide() {
-            const next = (currentSlide + 1) % slides.length;
-            setActiveSlide(next);
-        }
-    
-        function moveToPrevSlide() {
-            const prev = (currentSlide - 1 + slides.length) % slides.length;
-            setActiveSlide(prev);
-        }
-    
-        function startSlideshow() {
-            slideInterval = setInterval(moveToNextSlide, 5000);
-        }
-    
-        function stopSlideshow() {
-            clearInterval(slideInterval);
-        }
-    
-        navBtns.forEach((btn, i) => {
-            btn.addEventListener('click', () => {
-                setActiveSlide(i);
-                stopSlideshow();
-                startSlideshow();
+        
+        navBtns.forEach((btn, index) => {
+            btn.addEventListener("click", () => {
+                currentSlide = index;
+                showSlide(currentSlide);
             });
         });
-    
-        prevBtn.addEventListener('click', () => {
-            moveToPrevSlide();
-            stopSlideshow();
-            startSlideshow();
-        });
-    
-        nextBtn.addEventListener('click', () => {
-            moveToNextSlide();
-            stopSlideshow();
-            startSlideshow();
-        });
-    
-        const slideshowContainer = document.querySelector('.slideshow-container');
-        let touchStartX = 0;
-    
-        slideshowContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-    
-        slideshowContainer.addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (diff > 50) moveToNextSlide();
-            else if (diff < -50) moveToPrevSlide();
-            stopSlideshow();
-            startSlideshow();
-        });
-    
-        // === Hamburger Menu ===
+        
+        // Auto Slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 6000);
+        
+        
+        // =============== Hamburger Menu ===============
         const hamburger = document.querySelector('.hamburger');
-        const navList = document.querySelector('.nav-list');
-    
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navList.classList.toggle('active');
+        const navMenu = document.querySelector('.nav-list');
+        
+        hamburger.addEventListener('click', function () {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navList.classList.remove('active');
+        const languageButtons = document.querySelectorAll(".language-selector button");
+        
+        languageButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const selectedLang = btn.getAttribute("data-lang");
+        
+                // aktiv düymə
+                languageButtons.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+        
+                const elements = document.querySelectorAll("[data-key]");
+                elements.forEach((el) => {
+                    const key = el.getAttribute("data-key");
+                    if (translations[selectedLang] && translations[selectedLang][key]) {
+                        el.textContent = translations[selectedLang][key];
+                    }
+                });
             });
         });
-    
-        // === Smooth Scroll ===
+        
+        // =========== Smooth Scroll ============
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener("click", function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(this.getAttribute("href"));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    window.scrollTo({
+                        top: target.offsetTop,
+                        behavior: "smooth"
+                    });
                 }
             });
         });
-    
-        // === Fade-In on Scroll ===
-        const sections = document.querySelectorAll('.fade-in');
-        function checkScroll() {
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < window.innerHeight - 100) {
-                    section.classList.add('visible');
-                }
-            });
-        }
-        window.addEventListener('scroll', checkScroll);
-        checkScroll();
-    
-        // === Language Switch ===
-        function changeLanguage(lang) {
-            const translations = window.translations || {};
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-    
-            document.querySelectorAll('.language-selector button').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-        }
-    
-        document.querySelectorAll('.language-selector button').forEach(button => {
-            button.addEventListener('click', function () {
-                const lang = this.getAttribute('data-lang');
-                changeLanguage(lang);
-            });
-        });
-    
-        // Start the slideshow
-        setActiveSlide(0);
-        startSlideshow();
-    });
-    
