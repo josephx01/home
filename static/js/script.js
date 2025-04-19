@@ -247,19 +247,19 @@ document.querySelectorAll('.language-selector button').forEach(button => {
     });
 });
 
-ddocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-list");
-    const navLinks = document.querySelectorAll(".nav-link");
+    const navLinks = document.querySelectorAll(".nav-item a"); // Burada düzəliş edildi
     const header = document.getElementById('header');
-
+    
     // Hamburger klik edildikdə menyunu aç/qap
     if (hamburger && navMenu) {
         hamburger.addEventListener("click", function () {
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
         });
-
+        
         // Link kliklənəndə menyunu bağla
         navLinks.forEach(link => {
             link.addEventListener("click", () => {
@@ -268,7 +268,7 @@ ddocument.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
+    
     // Scroll zamanı header-a class əlavə et
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
