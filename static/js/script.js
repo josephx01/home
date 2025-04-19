@@ -267,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 });
-        // Header Scroll Effect
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
@@ -277,7 +276,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         
-        // Mobile Menu
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-list');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -293,18 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 navMenu.classList.remove('active');
             });
         });
-        
-        // Language Selector
-        const langButtons = document.querySelectorAll('.language-selector button');
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                langButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                // Here you would add code to switch language
-            });
-        });
-        
-        // Slideshow functionality
+    
         const slides = document.querySelectorAll('.slide');
         const navBtns = document.querySelectorAll('.nav-btn');
         const prevBtn = document.querySelector('.prev-btn');
@@ -312,7 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentSlide = 0;
         let slideInterval;
         
-        // Ensure proper loading of background images on mobile
         function preloadImages() {
             slides.forEach(slide => {
                 const bgUrl = getComputedStyle(slide).backgroundImage;
@@ -322,39 +308,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         }
-        
-        // Start automatic slideshow
         function startSlideshow() {
             slideInterval = setInterval(() => {
                 moveToNextSlide();
             }, 5000);
         }
         
-        // Stop automatic slideshow
         function stopSlideshow() {
             clearInterval(slideInterval);
         }
         
-        // Set active slide
         function setActiveSlide(index) {
-            // Remove active class from all slides
             slides.forEach(slide => {
                 slide.classList.remove('active');
             });
             
-            // Remove active class from all nav buttons
             navBtns.forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Add active class to current slide and nav button
             slides[index].classList.add('active');
             navBtns[index].classList.add('active');
             
             currentSlide = index;
         }
         
-        // Move to next slide
         function moveToNextSlide() {
             let nextIndex = currentSlide + 1;
             if (nextIndex >= slides.length) {
@@ -363,7 +341,6 @@ document.addEventListener("DOMContentLoaded", function () {
             setActiveSlide(nextIndex);
         }
         
-        // Move to previous slide
         function moveToPrevSlide() {
             let prevIndex = currentSlide - 1;
             if (prevIndex < 0) {
@@ -372,7 +349,6 @@ document.addEventListener("DOMContentLoaded", function () {
             setActiveSlide(prevIndex);
         }
         
-        // Add touch swipe functionality for mobile
         let touchStartX = 0;
         let touchEndX = 0;
         
@@ -388,24 +364,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
         function handleSwipe() {
-            const swipeThreshold = 50; // Minimum swipe distance in pixels
+            const swipeThreshold = 50; 
             
             if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe left - next slide
                 moveToNextSlide();
                 stopSlideshow();
                 startSlideshow();
             }
             
             if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe right - previous slide
                 moveToPrevSlide();
                 stopSlideshow();
                 startSlideshow();
             }
         }
         
-        // Navigation button click event
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const slideIndex = parseInt(btn.getAttribute('data-index'));
@@ -415,21 +388,18 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
         
-        // Previous button click event
         prevBtn.addEventListener('click', () => {
             moveToPrevSlide();
             stopSlideshow();
             startSlideshow();
         });
         
-        // Next button click event
         nextBtn.addEventListener('click', () => {
             moveToNextSlide();
             stopSlideshow();
             startSlideshow();
         });
         
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -439,11 +409,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Adjust for header height
+                        top: targetElement.offsetTop - 50, 
                         behavior: 'smooth'
                     });
-                    
-                    // Update active link
+
                     document.querySelectorAll('.nav-link').forEach(link => {
                         link.classList.remove('active');
                     });
@@ -452,12 +421,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
         
-        // Resize event to handle orientation changes
         window.addEventListener('resize', () => {
-            // Refresh the layout if needed
             const activeSlide = document.querySelector('.slide.active');
             if (activeSlide) {
-                // Force a repaint for mobile browsers
                 activeSlide.style.display = 'none';
                 setTimeout(() => {
                     activeSlide.style.display = '';
@@ -465,7 +431,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         
-        // Start slideshow on page load
         preloadImages();
         startSlideshow();
 
@@ -483,10 +448,8 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
         document.addEventListener('DOMContentLoaded', function() {
-            // Section animasiyaları üçün
             const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
             
-            // Scroll hadisəsi
             function checkScroll() {
                 sections.forEach(section => {
                     const sectionTop = section.getBoundingClientRect().top;
@@ -497,14 +460,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             }
-            
-            // İlk yüklənmədə yoxla
+
             checkScroll();
             
-            // Scroll zamanı yoxla
             window.addEventListener('scroll', checkScroll);
             
-            // Scroll-link səlis keçid
             const scrollLinks = document.querySelectorAll('a[href^="#"]');
             scrollLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -514,9 +474,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     const targetElement = document.querySelector(targetId);
                     
                     if (targetElement) {
-                        // Səlis scroll
                         window.scrollTo({
-                            top: targetElement.offsetTop - 70, // Header hündürlüyünü kompensasiya edir
+                            top: targetElement.offsetTop - 70, 
                             behavior: 'smooth'
                         });
                     }
