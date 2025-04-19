@@ -247,51 +247,37 @@ document.querySelectorAll('.language-selector button').forEach(button => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+ddocument.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.querySelector(".hamburger");
-    const navList = document.querySelector(".nav-list");
+    const navMenu = document.querySelector(".nav-list");
     const navLinks = document.querySelectorAll(".nav-link");
+    const header = document.getElementById('header');
 
-    if (hamburger && navList) {
+    // Hamburger klik edildikdə menyunu aç/qap
+    if (hamburger && navMenu) {
         hamburger.addEventListener("click", function () {
             hamburger.classList.toggle("active");
-            navList.classList.toggle("active");
+            navMenu.classList.toggle("active");
         });
 
+        // Link kliklənəndə menyunu bağla
         navLinks.forEach(link => {
             link.addEventListener("click", () => {
                 hamburger.classList.remove("active");
-                navList.classList.remove("active");
+                navMenu.classList.remove("active");
             });
         });
     }
+
+    // Scroll zamanı header-a class əlavə et
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 });
-});
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-list');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-    
         const slides = document.querySelectorAll('.slide');
         const navBtns = document.querySelectorAll('.nav-btn');
         const prevBtn = document.querySelector('.prev-btn');
