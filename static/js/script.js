@@ -223,34 +223,37 @@ document.addEventListener('DOMContentLoaded', function() {
             "follow-us": "Bizi Takip Edin",
             "footer-description": "Tadilat ve temizlik hizmetlerinde profesyonel çözümler.",
             "rights-reserved": "Tüm hakları saklıdır."
-    }
-};
-  function changeLanguage(lang) {
-    console.log("Dil dəyişdirilir: " + lang);
-    
-    document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
         }
-    });
-    
-    document.querySelectorAll('.language-selector button').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
-}
+    };
 
-document.querySelectorAll('.language-selector button').forEach(button => {
-    button.addEventListener('click', function() {
-        const lang = this.getAttribute('data-lang');
-        changeLanguage(lang);
-    });
-});
+    // Dil dəyişdirmə funksiyası
+    function changeLanguage(lang) {
+        console.log("Dil dəyişdirilir: " + lang);
+        
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.getAttribute('data-key');
+            if (translations[lang] && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+        
+        document.querySelectorAll('.language-selector button').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", function () {
+    // Dil dəyişdirmə düymələri üçün hadisə dinləyiciləri
+    document.querySelectorAll('.language-selector button').forEach(button => {
+        button.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            changeLanguage(lang);
+        });
+    });
+
+    // Hamburger menyu və naviqasiya elementləri
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-list");
-    const navLinks = document.querySelectorAll(".nav-item a"); // Burada düzəliş edildi
+    const navLinks = document.querySelectorAll(".nav-item a"); // Düzgün seçici
     const header = document.getElementById('header');
     
     // Hamburger klik edildikdə menyunu aç/qap
@@ -277,69 +280,72 @@ document.addEventListener("DOMContentLoaded", function () {
             header.classList.remove('scrolled');
         }
     });
-});
-        const slides = document.querySelectorAll('.slide');
-        const navBtns = document.querySelectorAll('.nav-btn');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        let currentSlide = 0;
-        let slideInterval;
-        
-        function preloadImages() {
-            slides.forEach(slide => {
-                const bgUrl = getComputedStyle(slide).backgroundImage;
-                if (bgUrl && bgUrl !== 'none') {
-                    const img = new Image();
-                    img.src = bgUrl.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-                }
-            });
-        }
-        function startSlideshow() {
-            slideInterval = setInterval(() => {
-                moveToNextSlide();
-            }, 5000);
-        }
-        
-        function stopSlideshow() {
-            clearInterval(slideInterval);
-        }
-        
-        function setActiveSlide(index) {
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            navBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            slides[index].classList.add('active');
-            navBtns[index].classList.add('active');
-            
-            currentSlide = index;
-        }
-        
-        function moveToNextSlide() {
-            let nextIndex = currentSlide + 1;
-            if (nextIndex >= slides.length) {
-                nextIndex = 0;
+    
+    // Slayd göstəricisi kodları
+    const slides = document.querySelectorAll('.slide');
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentSlide = 0;
+    let slideInterval;
+    
+    function preloadImages() {
+        slides.forEach(slide => {
+            const bgUrl = getComputedStyle(slide).backgroundImage;
+            if (bgUrl && bgUrl !== 'none') {
+                const img = new Image();
+                img.src = bgUrl.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
             }
-            setActiveSlide(nextIndex);
+        });
+    }
+    
+    function startSlideshow() {
+        slideInterval = setInterval(() => {
+            moveToNextSlide();
+        }, 5000);
+    }
+    
+    function stopSlideshow() {
+        clearInterval(slideInterval);
+    }
+    
+    function setActiveSlide(index) {
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        navBtns.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        slides[index].classList.add('active');
+        navBtns[index].classList.add('active');
+        
+        currentSlide = index;
+    }
+    
+    function moveToNextSlide() {
+        let nextIndex = currentSlide + 1;
+        if (nextIndex >= slides.length) {
+            nextIndex = 0;
         }
-        
-        function moveToPrevSlide() {
-            let prevIndex = currentSlide - 1;
-            if (prevIndex < 0) {
-                prevIndex = slides.length - 1;
-            }
-            setActiveSlide(prevIndex);
+        setActiveSlide(nextIndex);
+    }
+    
+    function moveToPrevSlide() {
+        let prevIndex = currentSlide - 1;
+        if (prevIndex < 0) {
+            prevIndex = slides.length - 1;
         }
-        
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        const slideshowContainer = document.querySelector('.slideshow-container');
-        
+        setActiveSlide(prevIndex);
+    }
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    
+    if (slideshowContainer) {
         slideshowContainer.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         });
@@ -348,23 +354,25 @@ document.addEventListener("DOMContentLoaded", function () {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50; 
         
-        function handleSwipe() {
-            const swipeThreshold = 50; 
-            
-            if (touchEndX < touchStartX - swipeThreshold) {
-                moveToNextSlide();
-                stopSlideshow();
-                startSlideshow();
-            }
-            
-            if (touchEndX > touchStartX + swipeThreshold) {
-                moveToPrevSlide();
-                stopSlideshow();
-                startSlideshow();
-            }
+        if (touchEndX < touchStartX - swipeThreshold) {
+            moveToNextSlide();
+            stopSlideshow();
+            startSlideshow();
         }
         
+        if (touchEndX > touchStartX + swipeThreshold) {
+            moveToPrevSlide();
+            stopSlideshow();
+            startSlideshow();
+        }
+    }
+    
+    if (navBtns && navBtns.length > 0) {
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const slideIndex = parseInt(btn.getAttribute('data-index'));
@@ -373,98 +381,79 @@ document.addEventListener("DOMContentLoaded", function () {
                 startSlideshow();
             });
         });
-        
+    }
+    
+    if (prevBtn) {
         prevBtn.addEventListener('click', () => {
             moveToPrevSlide();
             stopSlideshow();
             startSlideshow();
         });
-        
+    }
+    
+    if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             moveToNextSlide();
             stopSlideshow();
             startSlideshow();
         });
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+    }
+    
+    // Smooth scroll üçün kod
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70, 
+                    behavior: 'smooth'
+                });
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 50, 
-                        behavior: 'smooth'
-                    });
-
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
-        
-        window.addEventListener('resize', () => {
-            const activeSlide = document.querySelector('.slide.active');
-            if (activeSlide) {
-                activeSlide.style.display = 'none';
-                setTimeout(() => {
-                    activeSlide.style.display = '';
-                }, 10);
+                // Aktiv sinfi təyin et - navLinks istifadə edirik
+                navLinks.forEach(navlink => {
+                    navlink.classList.remove('active');
+                });
+                this.classList.add('active');
             }
         });
-        
+    });
+    
+    // Animasiya üçün scroll hadisələri
+    const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
+    
+    function checkScroll() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const sectionVisible = (sectionTop < window.innerHeight - 100);
+            
+            if (sectionVisible) {
+                section.classList.add('visible');
+            }
+        });
+    }
+    
+    // İlkin yoxlama və scroll hadisəsini əlavə et
+    checkScroll();
+    window.addEventListener('scroll', checkScroll);
+    
+    // Responsive üçün pəncərə ölçüsü dəyişən zaman hadisə
+    window.addEventListener('resize', () => {
+        const activeSlide = document.querySelector('.slide.active');
+        if (activeSlide) {
+            activeSlide.style.display = 'none';
+            setTimeout(() => {
+                activeSlide.style.display = '';
+            }, 10);
+        }
+    });
+    
+    // Əgər slayd elementləri varsa
+    if (slides && slides.length > 0) {
         preloadImages();
         startSlideshow();
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section-title, .about-content, .services-grid, .products-grid, .contact-content, .contact-form');
-            
-            function checkScroll() {
-                sections.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top;
-                    const sectionVisible = (sectionTop < window.innerHeight - 100);
-                    
-                    if (sectionVisible) {
-                        section.classList.add('visible');
-                    }
-                });
-            }
-
-            checkScroll();
-            
-            window.addEventListener('scroll', checkScroll);
-            
-            const scrollLinks = document.querySelectorAll('a[href^="#"]');
-            scrollLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 70, 
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
+    }
+});
