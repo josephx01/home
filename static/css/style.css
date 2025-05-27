@@ -162,6 +162,7 @@ section {
 .nav-list {
     display: flex;
     list-style: none;
+    color: white;
 }
 
 .nav-item {
