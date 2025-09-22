@@ -4,26 +4,14 @@ import subprocess
 from django.shortcuts import render, redirect
 from .forms import ProductForm
 
-def Product(request):
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()  # Fayl serverə saxlanır
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
 
-            # Faylı run etmək
-            file_path = product.image.path
-            try:
-                # Python faylı üçün
-                subprocess.run(["python3", file_path], check=True)
-            except subprocess.CalledProcessError as e:
-                print("Fayl icra olunmadı:", e)
-
-            return redirect("success_page")
-    else:
-        form = ProductForm()
-    
-    return render(request, "upload.html", {"form": form})
-        
+    def __str__(self):
+        return self.name
 class Contact(models.Model):
     name = models.CharField(max_length=100, verbose_name="Ad Soyad")
     email = models.EmailField(verbose_name="E-poçt")
