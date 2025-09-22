@@ -22,9 +22,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
+    path('temp-create-admin/', temp_create_admin),
     path('', index, name='index'),
-   path('contact/', index, name='contact'),
-     path('paket/<str:package_key>/', package_detail, name='package_detail'),    
+    path('contact/', index, name='contact'),
+    path('paket/<str:package_key>/', package_detail, name='package_detail'),    
 ]
 if settings.DEBUG:
    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
