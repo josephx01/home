@@ -5,6 +5,7 @@ from .forms import ContactForm, PackageOrderForm, ProductForm
 from django.core.mail import send_mail
 from django.conf import settings
 import subprocess
+import json
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
