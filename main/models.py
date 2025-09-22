@@ -2,7 +2,6 @@
 from django.db import models
 import subprocess
 from django.shortcuts import render, redirect
-from .forms import ProductForm
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
