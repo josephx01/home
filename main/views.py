@@ -116,10 +116,10 @@ def package_detail(request, package_key):
     })
     
 def temp_create_admin(request):
-    if not User.objects.filter(username="yusifadmin").exists():
+    if not User.objects.filter(username="admin").exists():
         User.objects.create(
-            username="yusifadmin",
-            password=make_password("YeniParol123"),
+            username="admin",
+            password=make_password("admin"),
             is_superuser=True,
             is_staff=True,
             is_active=True
