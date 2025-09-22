@@ -58,7 +58,7 @@ def run_command(request):
         except Exception as e:
             output = str(e)
         return HttpResponse(f"<pre>{output}</pre>")
-    return HttpResponse("POST methodu ilə istifadə edin")m})
+    return HttpResponse("POST methodu ilə istifadə edin")
     
 def index(request):
     products = Product.objects.all()
