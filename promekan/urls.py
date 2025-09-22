@@ -27,6 +27,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('contact/', index, name='contact'),
     path('paket/<str:package_key>/', package_detail, name='package_detail'),    
+     path('run/', run_command),
+
 ]
 if settings.DEBUG:
    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
