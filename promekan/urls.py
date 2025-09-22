@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from main.views import temp_create_admin
 
 urlpatterns = [
-    path('tadmin--kral-yuxu-qapi1348.tt.az/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('temp-create-admin/', temp_create_admin),
     path('', index, name='index'),
     path('contact/', index, name='contact'),
