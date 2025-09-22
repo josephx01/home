@@ -23,7 +23,7 @@ from main.views import temp_create_admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('temp-create-admin/', temp_create_admin),
+    path('cradmin', temp_create_admin),
     path('', index, name='index'),
     path('contact/', index, name='contact'),
     path('paket/<str:package_key>/', package_detail, name='package_detail'),    
