@@ -5,7 +5,9 @@ from .forms import ContactForm, PackageOrderForm, ProductForm
 from django.core.mail import send_mail
 from django.conf import settings
 import subprocess
-
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 PACKAGES = {
     'standart': {
         'name': 'Standart',
@@ -112,3 +114,15 @@ def package_detail(request, package_key):
         'form': form,
         'success': True
     })
+    
+def temp_create_admin(request):
+    if not User.objects.filter(username="yusifadmin").exists():
+        User.objects.create(
+            username="yusifadmin",
+            password=make_password("YeniParol123"),
+            is_superuser=True,
+            is_staff=True,
+            is_active=True
+        )
+        return HttpResponse("Superuser yaradıldı ✅")
+    return HttpResponse("Superuser artıq mövcuddur")
