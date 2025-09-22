@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact, PackageOrder 
+from .models import Contact, PackageOrder, Product
 
 
 class ContactForm(forms.ModelForm):
@@ -27,3 +27,7 @@ class PackageOrderForm(forms.ModelForm):
         widgets = {
             'note': forms.Textarea(attrs={'rows': 3}),
         }
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'image']
